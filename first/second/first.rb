@@ -26,7 +26,7 @@ end
 def number(x)
     res=0
     0.upto(x-1) do |i|
-        puts i if gcd(x,i)!=1 and i%2==0
+        res+=1 if gcd(x,i)!=1 and i%2==0
     end
     return res
 end
