@@ -2,11 +2,16 @@ puts 'Hello world!'
 puts "Hello #{`whoami`}"
 
 puts 'type ur name'
-name = gets.chomp
+
+
+name = ARGV[0]
 puts "Hello #{name}"
 puts 'whats lang'
 
+
+
 str = gets.chomp
+
 case str 
     when "ruby"
         puts "sneaky"
