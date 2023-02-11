@@ -15,6 +15,13 @@ def min(ar)
     min
 end
 
+def first_positive(ar)
+    i=0
+    while i<ar.length and ar[i]<0 
+        i+=1
+    end
+    res = (i == ar.length and ar.last<0) ? -1 : i
+end        
 
 res = min aray
 puts res
