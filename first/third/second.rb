@@ -18,7 +18,8 @@ end
 
 # func = {0 => min,2 => 'b'}
 
-file_pathARG=ARGV[0].chomp
+func_num=ARGV[0]
+file_pathARG=ARGV[1]
 
 def func(num, file_path)
     file = File.open(file_path)
@@ -33,4 +34,4 @@ def func(num, file_path)
         end
 end
 
-func(1,file_pathARG)
+func(file_num,file_pathARG)
