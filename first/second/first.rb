@@ -23,7 +23,7 @@ end
 #     end
 #     return res
 # end
-def number(x)
+def even_!prime_with_x(x)
     res=0
     0.upto(x-1) do |i|
         res+=1 if gcd(x,i)!=1 and i%2==0

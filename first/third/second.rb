@@ -17,7 +17,8 @@ def first_positive(ar)
 end   
 
 # func = {0 => min,2 => 'b'}
-
+func_num=ARGV[0]
+file_pathARGV=ARGV[1]
 def func(num, file_path)
     file = File.open(file_path)
     file_data = file.read.split().map(&:to_i)
@@ -31,4 +32,4 @@ def func(num, file_path)
         end
 end
 
-func(1,'data.txt')
+func(func_num.to_i,file_pathARGV)
