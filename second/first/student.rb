@@ -1,13 +1,14 @@
 class Student
+    attr_reader :Phone
     attr_accessor :ID,
                   :Name,
                   :Last_name,
                   :Git,
-                  :Phone,
-                  :Telegram
+                  :Telegram,
                   :Email
 
-    def initialize(name:"John",last_name:"Doe",options={})
+
+    def initialize(name:"John",last_name:"Doe",options:{})
         @Name,@Last_name=name,last_name
         self.ID=options[:ID]
         self.Git=options[:Git]
@@ -15,7 +16,16 @@ class Student
         self.Email=options[:Email]
         self.Telegram=options[:Telegram]
     end
-   
+
+    def self.phone_valid?(phone)
+        phone.match(/\+?[7,8]{1}\-\d{3}\-\d{3}\-\d{2}\-\d{2}$/)
+    end
+    
+    def Phone=(phone)
+        raise ArgumentError,"Invalid phone number" if !phone.nil?&&!Student.phone_valid?(phone)
+        @Phone = phone
+    end
+    
     def print_student()
         puts "Name: #{@Name}, Last name: #{@Last_name}, Git: #{@Git}, Telegram: #{@Telegram}"
     end
