@@ -38,6 +38,10 @@ class Student
     def Phone=(phone)
         @Phone=phone
     end
+
+    def print_student()
+        puts "Name: #{@Name}, Last name: #{@Last_name}, Git: #{@Git}, Telegram: #{@Telegram}"
+    end
 end
 
     
