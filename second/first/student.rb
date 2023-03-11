@@ -85,7 +85,13 @@ class Student
         self.git?||self.contacts?
     end
 
-    def print_student()
+    def set_contacts(contacts)
+        self.Phone=contacts[:Phone] unless !contacts.key?(:Phone)
+        self.Email=contacts[:Email] if  contacts.key?(:Email)
+        self.Telegram=contacts[:Telegram] if contacts.key?(:Telegram)
+    end
+
+    def print_student
         puts "Name: #{@Name}, Last name: #{@Last_name}, Git: #{@Git}, Telegram: #{@Telegram}"
     end
 end
