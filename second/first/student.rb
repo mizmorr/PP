@@ -9,9 +9,8 @@ class Student
                 :Telegram,
                 :Email
 
-    attr_writer :Email
     
-    def initialize(name:"John",last_name:"Doe",options:{})
+    def initialize(name:,last_name:,options:{})
         @Name,@Last_name=name,last_name
         self.ID=options["ID"]
         self.Git=options["Git"]
@@ -70,6 +69,7 @@ class Student
     def self.gmail_valid?(gmail)
         gmail.match /^[\d\w]+\@gmail.com$/
     end
+
     def Email=(email)
         raise TypeError, "Bad mail!!!!: #{email}" if !email.nil?&&!Student.gmail_valid?(email)
         @Email = email
@@ -93,7 +93,7 @@ class Student
         self.Telegram=contacts[:Telegram] if contacts.key?(:Telegram)
     end
 
-    def to_str
+    def to_s
         str="Name: #{@Name}, Last name: #{@Last_name}"
         str+=", Git: #{@Git}" unless @Git.nil?
         str+=", Telegram: #{@Telegram}" if not @Telegram.nil?
