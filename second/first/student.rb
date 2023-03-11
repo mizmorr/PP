@@ -1,3 +1,5 @@
+require 'json'
+
 class Student
     attr_reader :Phone,
                 :ID,
@@ -11,11 +13,11 @@ class Student
     
     def initialize(name:"John",last_name:"Doe",options:{})
         @Name,@Last_name=name,last_name
-        self.ID=options[:ID]
-        self.Git=options[:Git]
-        self.Phone=options[:Phone]
-        self.Email=options[:Email]
-        self.Telegram=options[:Telegram]
+        self.ID=options["ID"]
+        self.Git=options["Git"]
+        self.Phone=options["Phone"]
+        self.Email=options["Email"]
+        self.Telegram=options["Telegram"]
     end
 
     def self.phone_valid?(phone)
@@ -92,9 +94,17 @@ class Student
     end
 
     def to_str
-        str = "Name: #{@Name}, Last name: #{@Last_name}"
-        str+= ", Git: #{@Git}" unless @Git.nil?
-        str+= ", Telegram: #{@Telegram}" if not @Telegram.nil?
+        str="Name: #{@Name}, Last name: #{@Last_name}"
+        str+=", Git: #{@Git}" unless @Git.nil?
+        str+=", Telegram: #{@Telegram}" if not @Telegram.nil?
+        str
+
+    end
+
+    def Student.parse_s(str)
+        hash = JSON.parse(str)
+        raise ArgumentError, "Invalid arguments" if hash["Name"].nil?||hash["Last_name"].nil?
+        new name:hash["Name"], last_name:hash["Last_name"],options:hash.reject!{|k,v| k=='Name'||k=='Last_name'}
     end
 end
 
