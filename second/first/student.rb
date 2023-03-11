@@ -59,7 +59,7 @@ class Student
     def self.telegram_valid?(telegram)
         telegram.match /^[\w\d\s]+$/
     end
-    
+
     def Telegram=(telegram)
         raise TypeError, "Bad telegram: #{telegram}" if !telegram.nil?&&!Student.telegram_valid?(telegram)
         @Telegram = telegram
@@ -68,10 +68,21 @@ class Student
     def self.gmail_valid?(gmail)
         gmail.match /^[\d\w]+\@gmail.com$/
     end
-
     def Email=(email)
         raise TypeError, "Bad mail!!!!: #{email}" if !email.nil?&&!Student.gmail_valid?(email)
         @Email = email
+    end
+
+    def git?
+        !self.Git.nil?
+    end
+
+    def contacts?
+        !self.Phone.nil?||!self.Email.nil?||!self.Telegram.nil?
+    end
+
+    def validate
+        self.git?||self.contacts?
     end
 
     def print_student()
