@@ -91,8 +91,10 @@ class Student
         self.Telegram=contacts[:Telegram] if contacts.key?(:Telegram)
     end
 
-    def print_student
-        puts "Name: #{@Name}, Last name: #{@Last_name}, Git: #{@Git}, Telegram: #{@Telegram}"
+    def to_str
+        str = "Name: #{@Name}, Last name: #{@Last_name}"
+        str+= ", Git: #{@Git}" unless @Git.nil?
+        str+= ", Telegram: #{@Telegram}" if not @Telegram.nil?
     end
 end
 

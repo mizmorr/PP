@@ -6,4 +6,4 @@ student = Student.new name:"John",last_name:"Doe",options: {Telegram:"joe",Phone
 # p student.Name
 # p student2.Name
 # student2.print_student()
-p student.validate
+puts student.to_str
