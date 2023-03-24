@@ -1,5 +1,5 @@
-
-class Student_short
+load 'abstract_s.rb'
+class Student_short < Abstract_Student
     attr_reader :ID, :Initials,:Git,:Contact
     def initialize(id:, name:, git:, contact:)
         @ID = id

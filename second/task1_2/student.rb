@@ -1,6 +1,6 @@
 require 'json'
-
-class Student
+load 'abstract_s.rb'
+class Student < Abstract_Student
     attr_reader :Phone,
                 :ID,
                 :Name,
@@ -91,27 +91,12 @@ class Student
         !self.Phone.nil?||!self.Email.nil?||!self.Telegram.nil?
     end
 
-    def validate
-        self.git?||self.contacts?
-    end
-
-    def set_contacts(contacts)
+        def set_contacts(contacts)
         self.Phone=contacts[:Phone] unless !contacts.key?(:Phone)
         self.Email=contacts[:Email] if  contacts.key?(:Email)
         self.Telegram=contacts[:Telegram] if contacts.key?(:Telegram)
     end
-
-    def to_s
-        str="Name: #{@Name}, Last name: #{@Last_name}"
-        str+=", Git: #{@Git}" unless @Git.nil?
-        str+=", Telegram: #{@Telegram}" if not @Telegram.nil?
-        str+=", ID: #{@ID}" unless @ID.nil?
-        str+=", Email: #{@Email}" unless @Email.nil?
-        str+=", Phone: #{@Phone}" unless @Phone.nil?
-        str
-
-    end
-    
+   
     def Student.parse_s(str)
         hash = JSON.parse(str)
         raise ArgumentError, "Invalid arguments" if hash["name"].nil?||hash["last_name"].nil?
