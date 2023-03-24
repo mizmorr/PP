@@ -74,12 +74,12 @@ class Student
         @Telegram = telegram
     end
 
-    def self.gmail_valid?(gmail)
+    def self.email_valid?(gmail)
         gmail.match /^[\d\w]+\@gmail.com$/
     end
 
     def Email=(email)
-        raise TypeError, "Bad mail!!!!: #{email}" if !email.nil?&&!Student.gmail_valid?(email)
+        raise TypeError, "Bad mail!!!!: #{email}" if !email.nil?&&!Student.email_valid?(email)
         @Email = email
     end
 
@@ -118,29 +118,35 @@ class Student
         new name:hash["name"], last_name:hash["last_name"],options:hash
     end
     def getInfo 
-        @Last_name+" "+@Name[0]+git_to_s+get_contacts
+        "name: "+@Last_name+" "+@Name[0]+git_to_s+get_contacts
     end
+   
+
     protected
-    def get_contacts
-        return "" unless !contacts?
-        telegram_to_s+phone_to_s+email_to_s
-    end
+
     def git_to_s
         return "" unless self.git?
         ", git: #{@Git}"
+    end
+    def get_contacts
+        return "" unless contacts?
+        telegram_to_s+phone_to_s+email_to_s
+    end
+  
+    def email_to_s
+        return "" if self.Email.nil?
+        ", email: #{@Email}"
     end
     def telegram_to_s
         return "" unless !self.Telegram.nil?
         ", telegram: #{@Telegram}"
     end
+    
     def phone_to_s
         return "" if self.Phone.nil?
         ", phone: #{@Phone}"
     end
-    def email_to_s
-        return "" if self.Email.nil?
-        ", email: #{@Email}"
-    end
+    
 
 end
 
