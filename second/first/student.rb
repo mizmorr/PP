@@ -19,6 +19,11 @@ class Student
         self.Telegram=options["Telegram"]
     end
 
+    def Student.from_s(str)
+        hash=str.split(',').map{|tuple| tuple.split(':')}.to_h
+        Student.new(name:hash["name"],last_name:hash["last_name"],options:hash)
+
+    end
     def self.phone_valid?(phone)
         phone.match /^\+?[7,8]{1}\-\d{3}\-\d{3}\-\d{2}\-\d{2}$/
     end
