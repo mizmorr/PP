@@ -12,15 +12,18 @@ class Student
     
     def initialize(name:,last_name:,options:{})
         @Name,@Last_name=name,last_name
-        self.ID=options["ID"]
-        self.Git=options["Git"]
-        self.Phone=options["Phone"]
-        self.Email=options["Email"]
-        self.Telegram=options["Telegram"]
+        self.ID=options["id"]
+        self.Git=options["git"]
+        self.Phone=options["phone"]
+        self.Email=options["email"]
+        self.Telegram=options["telegram"]
     end
 
     def Student.from_s(str)
         hash=str.split(',').map{|tuple| tuple.split(':')}.to_h
+        raise ArgumentError,"Invalid name" unless hash.key?("name")&&Student.name_valid?(hash["name"])
+        raise ArgumentError,"Invalid last name" unless hash.key?("last_name")&&Student.name_valid?(hash["last_name"])
+        raise ArgumentError,"Invalid params" if hash.reject{|k,v| k=='name'||k=='last_name'}.find{|key,value| !eval("self."+key+"_valid? \""+value+"\"") }
         Student.new(name:hash["name"],last_name:hash["last_name"],options:hash)
 
     end
@@ -108,8 +111,8 @@ class Student
 
     def Student.parse_s(str)
         hash = JSON.parse(str)
-        raise ArgumentError, "Invalid arguments" if hash["Name"].nil?||hash["Last_name"].nil?
-        new name:hash["Name"], last_name:hash["Last_name"],options:hash.reject!{|k,v| k=='Name'||k=='Last_name'}
+        raise ArgumentError, "Invalid arguments" if hash["name"].nil?||hash["last_name"].nil?
+        new name:hash["name"], last_name:hash["last_name"],options:hash
     end
 end
 
