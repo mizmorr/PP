@@ -4,7 +4,7 @@ class Abstract_Student
         raise NotImplementedError
     end
 
-    def contacts?
+    def contacts
         raise NotImplementedError
     end
     def to_s 
