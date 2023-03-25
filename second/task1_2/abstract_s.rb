@@ -1,4 +1,5 @@
 class Abstract_Student
+    attr_accessor :id,:first_name,:last_name
     def getInfo
         raise NotImplementedError
     end
