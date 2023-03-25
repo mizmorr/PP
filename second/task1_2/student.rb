@@ -88,23 +88,32 @@ class Student < Abstract_Student
         !self.Phone.nil?||!self.Email.nil?||!self.Telegram.nil?
     end
 
-        def set_contacts(contacts)
+    def set_contacts(contacts)
         self.Phone=contacts[:Phone] unless !contacts.key?(:Phone)
         self.Email=contacts[:Email] if  contacts.key?(:Email)
         self.Telegram=contacts[:Telegram] if contacts.key?(:Telegram)
     end
+
+    def self.from_txt(path_name)
+        raise FileNotFoundError if !File.exist?(path_name)
+        File.read(path_name).split("\n").map{|line| Student.parse_s(line)}
+    end
    
     def Student.parse_s(str)
-        hash = JSON.parse(str)
+        hash = JSON.parse("{"+str.split(',').map{|elem| elem.split(':')}.map{|el| "\""+el[0]+"\""+":"+"\""+el[1]+"\""}.join(',')+"}")
         raise ArgumentError, "Invalid arguments" if hash["name"].nil?||hash["last_name"].nil?
         new name:hash["name"], last_name:hash["last_name"],options:hash
+    end
+    def self.write_to_txt(path_name,student)
+        raise FileNotFoundError if !File.exist?(path_name)
+        File.open(path_name,'w') {|file| file.write(student.map{|stud|stud.getInfo}.join("\n"))}
     end
     def getInfo 
         "name: "+@Last_name+" "+@Name[0]+git_to_s+get_contacts
     end
    
 
-    protected
+    private
 
     def git_to_s
         return "" unless self.git?

@@ -1,0 +1,3 @@
+name: Dirk B, git: dirky_git
+name: Dirk2 B, git: dirky_git2, telegram: bob213
+name: Dirk3 B, git: dirky_git3, email: bob@gmail.com
