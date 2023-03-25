@@ -2,9 +2,6 @@ require 'json'
 load 'abstract_s.rb'
 class Student < Abstract_Student
     attr_reader :Phone,
-                :ID,
-                :Name,
-                :Last_name,
                 :Git,
                 :Telegram,
                 :Email
