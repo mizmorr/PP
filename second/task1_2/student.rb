@@ -1,5 +1,5 @@
 require 'json'
-load 'abstract_s.rb'
+load 'task1_2/abstract_s.rb'
 class Student < Abstract_Student
     attr_reader :Phone,
                 :Git,

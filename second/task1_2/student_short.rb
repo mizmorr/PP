@@ -1,4 +1,4 @@
-load 'abstract_s.rb'
+load 'task1_2/abstract_s.rb'
 class Student_short < Abstract_Student
     attr_reader :Git,:Contact
     def initialize(id:, name:, git:, contact:)
