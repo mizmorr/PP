@@ -1,14 +1,40 @@
 load 'task1_2/student.rb'
 load 'task1_2/student_short.rb'
 load 'task3/data_list_student_short.rb'
+load 'task3/names_pattern/names_filter.rb'
+load 'task3/names_pattern/names_template.rb'
+load 'task3/data_pattern/data_template.rb'
+load 'task3/data_pattern/data_construct.rb'
 
-require 'json'
+
+
+
 
 list = Student.from_txt('task1_2/data.txt')
-dlt = Data_list_student_short.new(list:list)
-dlt_2 = Data_list_student_short.new(list:list)
 
-p dlt.get_data
+filter = Names_without_id.new()
+constr = Data_construct.new()
 
-p dlt_2.get_data
+
+data_list = Data_list_student_short.new(list:list,filter:filter,constructor:constr)
+
+p data_list.get_names.map{|elem| elem.downcase}
+
+p data_list.get_data.data
+# -----------------------------
+
+# student = list[0]
+# p student.getInfo.split(',').map{|elem| elem.lstrip}
+
+# p list.map{|elem| elem.getInfo.split(',').map{|elem| elem.lstrip}}
+# list.length.times{|i| result.push([i].concat list[i].getInfo.split(',').map{|elem| elem.lstrip})}
+# p result
+# dt = Data_template.new()
+# dt.construct(list3)
+
+
+# p list2.get_names
+# p dlt.get_data
+
+# p dlt_2.get_data
 

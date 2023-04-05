@@ -6,7 +6,7 @@ class Data_list
 
     def select(number)
         raise ArgumentError 'number bigger than list size' if number>=list.size
-        selectd.push(number)
+        selected.push(number)
     end
 
     def get_selected
@@ -29,7 +29,7 @@ class Data_list
         @list = list
     end
     def selected
-        @selectd
+        @selected
     end
     
     def selected=(sel)
