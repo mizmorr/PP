@@ -1,19 +1,19 @@
 require 'json'
 load 'task1_2/abstract_s.rb'
 class Student < Abstract_Student
-    attr_reader :Phone,
-                :Git,
-                :Telegram,
-                :Email
+    attr_reader :phone,
+                :git,
+                :telegram,
+                :email
 
     
     def initialize(name:,last_name:,options:{})
-        @Name,@Last_name=name,last_name
-        self.ID=options["id"]
-        self.Git=options["git"]
-        self.Phone=options["phone"]
-        self.Email=options["email"]
-        self.Telegram=options["telegram"]
+        @name,@last_name=name,last_name
+        self.id=options["id"]
+        self.git=options["git"]
+        self.phone=options["phone"]
+        self.email=options["email"]
+        self.telegram=options["telegram"]
     end
 
     def Student.from_s(str)
@@ -28,70 +28,70 @@ class Student < Abstract_Student
         phone.match /^\+?[7,8]{1}\-\d{3}\-\d{3}\-\d{2}\-\d{2}$/
     end
     
-    def Phone=(phone)
+    def phone=(phone)
         raise ArgumentError,"Invalid phone number" if !phone.nil?&&!Student.phone_valid?(phone)
-        @Phone = phone
+        @phone = phone
     end
     
     def self.id_valid?(id)
         String(id).match /^[0-9]+$/
     end
 
-    def ID=(id)
-        raise ArgumentError,"Invalid ID" if !id.nil?&&!Student.id_valid?(id)
-        @ID=id
+    def id=(id)
+        raise ArgumentError,"Invalid id" if !id.nil?&&!Student.id_valid?(id)
+        @id=id
     end
 
     def self.name_valid?(name)
         name.match /^[A-Z][^A-Z\d]+$/
     end
     
-    def Name=(name)
+    def name=(name)
         raise TypeError, "Bad name: #{name}" if !name.nil?&&!Student.name_valid?(name)
-        @Name=name
+        @name=name
     end
-    def Last_name=(last_name)
+    def last_name=(last_name)
         raise TypeError, "Bad name: #{last_name}" if !last_name.nil?&&!Student.name_valid?(last_name)
-        @Last_name = last_name
+        @last_name = last_name
     end
     def self.git_valid?(git)
         git.match /^[\d\w]+$/
     end
-    def Git=(git)
+    def git=(git)
         raise TypeError, "Bad git: #{git}" if !git.nil?&&!Student.git_valid?(git)
-        @Git = git
+        @git = git
     end
 
     def self.telegram_valid?(telegram)
         telegram.match /^[\w\d\s]+$/
     end
 
-    def Telegram=(telegram)
+    def telegram=(telegram)
         raise TypeError, "Bad telegram: #{telegram}" if !telegram.nil?&&!Student.telegram_valid?(telegram)
-        @Telegram = telegram
+        @telegram = telegram
     end
 
     def self.email_valid?(gmail)
         gmail.match /^[\d\w]+\@gmail.com$/
     end
 
-    def Email=(email)
+    def email=(email)
         raise TypeError, "Bad mail!!!!: #{email}" if !email.nil?&&!Student.email_valid?(email)
-        @Email = email
+        @email = email
     end
 
     def git?
-        !self.Git.nil?
+        !self.git.nil?
     end
 
     def contacts?
-        !self.Phone.nil?||!self.Email.nil?||!self.Telegram.nil?
+        !self.phone.nil?||!self.email.nil?||!self.telegram.nil?
     end
 
     def set_contacts(contacts)
-        self.Phone=contacts[:Phone] unless !contacts.key?(:Phone)
-        self.Email=contacts[:Email] if  contacts.key?(:Email)
-        self.Telegram=contacts[:Telegram] if contacts.key?(:Telegram)
+        self.phone=contacts[:phone] unless !contacts.key?(:phone)
+        self.email=contacts[:email] if  contacts.key?(:email)
+        self.telegram=contacts[:telegram] if contacts.key?(:telegram)
     end
 
     def self.from_txt(path_name)
@@ -109,7 +109,7 @@ class Student < Abstract_Student
         File.open(path_name,'w') {|file| file.write(student.map{|stud|stud.getInfo}.join("\n"))}
     end
     def getInfo 
-        "name: "+@Last_name+" "+@Name[0]+git_to_s+get_contacts
+        "name: "+@last_name+" "+@name[0]+git_to_s+get_contacts
     end
    
 
@@ -117,7 +117,7 @@ class Student < Abstract_Student
 
     def git_to_s
         return "" unless self.git?
-        ", git: #{@Git}"
+        ", git: #{@git}"
     end
     def get_contacts
         return "" unless contacts?
@@ -125,17 +125,17 @@ class Student < Abstract_Student
     end
   
     def email_to_s
-        return "" if self.Email.nil?
-        ", email: #{@Email}"
+        return "" if self.email.nil?
+        ", email: #{@email}"
     end
     def telegram_to_s
-        return "" unless !self.Telegram.nil?
-        ", telegram: #{@Telegram}"
+        return "" unless !self.telegram.nil?
+        ", telegram: #{@telegram}"
     end
     
     def phone_to_s
-        return "" if self.Phone.nil?
-        ", phone: #{@Phone}"
+        return "" if self.phone.nil?
+        ", phone: #{@phone}"
     end
     
 
