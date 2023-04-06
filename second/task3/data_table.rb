@@ -4,7 +4,7 @@ class Data_table
         self.data = data
     end
 
-    def at(row:, column:)
+    def at(row, column)
         data[row][column]
     end
 

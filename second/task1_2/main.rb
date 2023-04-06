@@ -11,16 +11,19 @@ load 'task3/data_pattern/data_construct.rb'
 
 
 list = Student.from_txt('task1_2/data.txt')
-
-filter = Names_without_id.new()
-constr = Data_construct.new()
-
-
+filter = Names_without_id.new
+constr = Data_construct.new
 data_list = Data_list_student_short.new(list:list,filter:filter,constructor:constr)
 
-p data_list.get_names.map{|elem| elem.downcase}
+data = data_list.get_data
+# p data_list.get_names.map{|elem| elem.downcase}
+str=""
+(1..data.columns_count-1).each{|ind| str=str+(data.at 0,ind)+","}
+student2=Student_short.from_s(data.at(0,0),str[0...-1]) 
 
-p data_list.get_data.data
+
+
+
 # -----------------------------
 
 # student = list[0]

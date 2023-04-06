@@ -7,10 +7,14 @@ class Student_short < Abstract_Student
         @Git = git
         @Contact = contact
     end
+    def self.shift_s (data)
+        return "does not have.." unless !data.empty?         
+        data.shift[1] 
+    end
 
     def self.from_student(student)
         h = student.getInfo.split(', ').map{|tuple| tuple.split(': ')}.map{|tuple| [tuple[0].to_sym,tuple[1]]}.to_h
-        new(id:student.id,name:h[:name],git:h[:git],contact:h.reject{|key,value| key==:name||key==:git}.shift[1]) 
+        new(id:student.id,name:h[:name],git:h[:git],contact:shift_s(h.reject{|key,value| key==:name||key==:git})) 
     end
     def self.from_s(id, str)
         h = str.split(',').map{|elem| elem.split(':')}.map{|elem| [elem[0].to_sym,elem[1]]}.to_h
