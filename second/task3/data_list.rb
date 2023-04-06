@@ -10,7 +10,8 @@ class Data_list
     end
 
     def get_selected
-     list.select {|elem| selected.include?(elem)}
+        (0...list.size)
+            .filter { |x| selected_objects.include? x }
     end
 
     def get_names

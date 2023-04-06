@@ -12,7 +12,7 @@ class Data_list_student_short < Data_list
     end
     
     def get_names
-        name_filter.filter list[0]
+        name_filter.filter
     end
 
     def set_list(list)

@@ -4,16 +4,15 @@ class Names_template
         self.name_filter = filter
     end
 
-    def filter(names)
-        select(process(names))
+    def filter
+        select
     end
 
     private
 
-    def process(names)
-        names.instance_variables.map{|attr| attr.slice(1,attr.length)}
-    end
-    def select(names)
+    
+    def select
+        names = ["id","Student's initials","Git","Contacts"]
         eval("names"+self.name_filter)
     end
 
