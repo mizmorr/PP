@@ -1,0 +1,3 @@
+name:John,last_name:Doe,git:joe_git,email:real_joe@gmail.com
+name:Joe,last_name:Doe,git:joe_git2,telegram:john213
+name:Josh,last_name:Doe,git:joe_git3,email:doe@gmail.com

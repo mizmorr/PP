@@ -22,7 +22,9 @@ str=""
 student2=Student_short.from_s(data.at(0,0),str[0...-1]) 
 
 
-
+list2 = Student.from_txt('task1_2/data2.txt')
+data_list.set_list(list2)
+p data_list.get_data
 
 # -----------------------------
 

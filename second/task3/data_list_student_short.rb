@@ -13,7 +13,12 @@ class Data_list_student_short < Data_list
     
     def get_names
         name_filter.filter list[0]
-    end 
+    end
+
+    def set_list(list)
+        self.list=list
+    end
+         
     private
     def name_filter
         @name_filter
