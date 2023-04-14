@@ -1,12 +1,13 @@
-require 'json'
 load 'task1_2/abstract_s.rb'
+require 'json'
+
 class Student < Abstract_Student
     attr_reader :phone,
                 :git,
                 :telegram,
                 :email
 
-    
+    public_class_method :new
     def initialize(name:,last_name:,options:{})
         @name,@last_name=name,last_name
         self.id=options["id"]
@@ -23,6 +24,16 @@ class Student < Abstract_Student
         raise ArgumentError,"Invalid params" if hash.reject{|k,v| k=='name'||k=='last_name'}.find{|key,value| !eval("self."+key+"_valid? \""+value+"\"") }
         Student.new(name:hash["name"],last_name:hash["last_name"],options:hash)
 
+    end
+    def self.from_txt(path_name)
+        raise FileNotFoundError if !File.exist?(path_name)
+        File.read(path_name).split("\n").map{|line| Student.parse_s(line)}
+    end
+
+    def Student.parse_s(str)
+        hash = JSON.parse("{"+str.split(',').map{|elem| elem.split(':')}.map{|el| "\""+el[0]+"\""+":"+"\""+el[1]+"\""}.join(',')+"}")
+        raise ArgumentError, "Invalid arguments" if hash["name"].nil?||hash["last_name"].nil?
+        new name:hash["name"], last_name:hash["last_name"],options:hash
     end
     def self.phone_valid?(phone)
         phone.match /^\+?[7,8]{1}\-\d{3}\-\d{3}\-\d{2}\-\d{2}$/
@@ -94,20 +105,6 @@ class Student < Abstract_Student
         self.telegram=contacts[:telegram] if contacts.key?(:telegram)
     end
 
-    def self.from_txt(path_name)
-        raise FileNotFoundError if !File.exist?(path_name)
-        File.read(path_name).split("\n").map{|line| Student.parse_s(line)}
-    end
-   
-    def Student.parse_s(str)
-        hash = JSON.parse("{"+str.split(',').map{|elem| elem.split(':')}.map{|el| "\""+el[0]+"\""+":"+"\""+el[1]+"\""}.join(',')+"}")
-        raise ArgumentError, "Invalid arguments" if hash["name"].nil?||hash["last_name"].nil?
-        new name:hash["name"], last_name:hash["last_name"],options:hash
-    end
-    def self.write_to_txt(path_name,student)
-        raise FileNotFoundError if !File.exist?(path_name)
-        File.open(path_name,'w') {|file| file.write(student.map{|stud|stud.getInfo}.join("\n"))}
-    end
     def getInfo 
         "name: "+@last_name+" "+@name[0]+git_to_s+get_contacts
     end

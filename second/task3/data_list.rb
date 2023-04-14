@@ -11,7 +11,7 @@ class Data_list
 
     def get_selected
         (0...list.size)
-            .filter { |x| selected_objects.include? x.id }
+            .filter { |x| selected.include? x.id }
     end
 
     def get_names

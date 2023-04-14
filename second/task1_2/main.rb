@@ -5,17 +5,21 @@ load 'task3/names_pattern/names_filter.rb'
 load 'task3/names_pattern/names_template.rb'
 load 'task3/data_pattern/data_template.rb'
 load 'task3/data_pattern/data_construct.rb'
+load 'task4/student_list_txt.rb'
 
 
+studentlt=Student_list_txt.new path_name:'task1_2/data.txt'
+list=studentlt.get_k_n_student_short_list(2,2)
+studentlt.set_path('task4/data.txt')
+studentlt.write_to_txt
+# filter = Names_without_id.new
+# constr = Data_construct.new
+# data_list = Data_list_student_short.new(list:list,filter:filter,constructor:constr)
+# p data_list.get_data
+# p data = data_list.get_names
 
-
-
-list = Student.from_txt('task1_2/data.txt')
-filter = Names_without_id.new
-constr = Data_construct.new
-data_list = Data_list_student_short.new(list:list,filter:filter,constructor:constr)
-
-p data = data_list.get_names
+# p raise 'does not exist' unless ![1,2,3,4].detect{|elem| elem==5}.nil?
+#--------------------------------------------------------
 
 # p data_list.get_names.map{|elem| elem.downcase}
 # str=""
