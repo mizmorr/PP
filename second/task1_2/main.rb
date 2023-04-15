@@ -19,6 +19,8 @@ studentlt.set_path('task4/data.txt')
 student_json=Student_list_json.new path_name: 'task4/data.json'
 student_json.set_path 'task4/data2.json'
 student_json.write_to_json
+stud=student_json.list[0]
+p stud
 # filter = Names_without_id.new
 # constr = Data_construct.new
 # data_list = Data_list_student_short.new(list:list,filter:filter,constructor:constr)
