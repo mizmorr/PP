@@ -59,11 +59,7 @@ class Student_list_default
     end
     
     private 
-    def Student_list_txt.parse_s(str)
-        hash = JSON.parse("{"+str.split(',').map{|elem| elem.split(':')}.map{|el| "\""+el[0]+"\""+":"+"\""+el[1]+"\""}.join(',')+"}")
-        raise ArgumentError, "Invalid arguments" if hash["name"].nil?||hash["last_name"].nil?
-        Student.new(name:hash["name"], last_name:hash["last_name"],options:hash)
-    end
+    
     def strategy
         @strategy
     end
