@@ -1,5 +1,4 @@
 load 'task1_2/abstract_s.rb'
-require 'json'
 
 class Student < Abstract_Student
     attr_reader :phone,
@@ -25,16 +24,7 @@ class Student < Abstract_Student
         Student.new(name:hash["name"],last_name:hash["last_name"],options:hash)
 
     end
-    def self.from_txt(path_name)
-        raise FileNotFoundError if !File.exist?(path_name)
-        File.read(path_name).split("\n").map{|line| Student.parse_s(line)}
-    end
 
-    def Student.parse_s(str)
-        hash = JSON.parse("{"+str.split(',').map{|elem| elem.split(':')}.map{|el| "\""+el[0]+"\""+":"+"\""+el[1]+"\""}.join(',')+"}")
-        raise ArgumentError, "Invalid arguments" if hash["name"].nil?||hash["last_name"].nil?
-        new name:hash["name"], last_name:hash["last_name"],options:hash
-    end
     def self.phone_valid?(phone)
         phone.match /^\+?[7,8]{1}\-\d{3}\-\d{3}\-\d{2}\-\d{2}$/
     end
