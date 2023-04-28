@@ -8,6 +8,8 @@ load 'task3/data_pattern/data_construct.rb'
 load 'task4/student_list_txt.rb'
 load 'task4/student_list_JSON.rb'
 load 'task4/student_list_default.rb'
+load 'third/first/student_list_db.rb'
+
 
 
 require 'json'
@@ -16,7 +18,12 @@ require 'json'
 
 # student_json=Student_list_json.new path_name: 'task4/data.json'
 student_default=Student_list_default.new(path_name: 'task1_2/data.txt',strategy:Student_list_txt.new)
-p student_default.from
+student=student_default.from[0]
+
+student_h=student.instance_variables.each_with_object({}){|v,h| h[v]=student.instance_variable_get(v)}.to_h
+p student_h[:@name]
+
+Student_list_DB.count
 # filter = Names_without_id.new
 # constr = Data_construct.new
 # data_list = Data_list_student_short.new(list:list,filter:filter,constructor:constr)

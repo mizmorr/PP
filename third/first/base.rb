@@ -1,12 +1,12 @@
 #!/usr/bin/ruby
 require 'mysql2'
 
-@db_host = "localhost"
 
-@db_user="root"
+class Connect 
+    attr_reader :connection
 
-@pasrd="1@qAwSxZ"
+    def initialize
+        @connection=Mysql2::Client.new(:host=>'localhost', :username=>'root', :password=>'1@qAwSxZ', :database=>'Ruby')
+    end
 
-@db_name="Ruby"
-client = Mysql2::Client.new(:host=>@db_host, :username=>@db_user, :password=>@pasrd, :database=>@db_name)
-puts client.query("SELECT * FROM Student").entries
+end
