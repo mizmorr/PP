@@ -37,7 +37,7 @@ class Turkey < Abstract_Turkey
 end
 
 class TurkeyAdapter
-    def inittialize 
+    def initialize 
         @turkey=Turkey.new
     end
     def duck_sound
